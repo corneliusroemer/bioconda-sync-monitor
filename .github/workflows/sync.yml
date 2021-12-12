@@ -27,5 +27,6 @@ jobs:
         run: |
           echo "Sync not success"
           gh issue create -R bioconda/bioconda-recipes --title "Bioconda CDN sync >1hr behind" --body "${{ env.output }}"
+          exit 1
         env:
           GITHUB_TOKEN: ${{ secrets.ACTION }}
