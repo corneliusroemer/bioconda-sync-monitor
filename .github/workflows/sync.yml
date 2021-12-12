@@ -17,7 +17,7 @@ jobs:
       - id: script
         run: python main.py
       - name: Sync works
-        if: ${{ env.result == '0' }}
+        if: ${{ env.result == '1' }}
         run: |
           echo "Sync success"
           echo ${{ env.output }}
