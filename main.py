@@ -28,7 +28,7 @@ for name,url in repodata.items():
     last_modified[name] = r.headers["Last-Modified"]
 last_modified_parsed = max(map(parser.parse, last_modified.values())) + datetime.timedelta(hours=1)
 #%%
-output = f"Last commit: {commit_dates_parsed[0]}\n Last sync: {last_modified_parsed - datetime.timedelta(hours=1)}"
+output = f"Last commit: {commit_dates_parsed[0]} Last sync: {last_modified_parsed - datetime.timedelta(hours=1)}"
 print(output)
 os.environ["LOG"] = output
 
