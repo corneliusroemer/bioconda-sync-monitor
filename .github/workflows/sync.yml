@@ -14,9 +14,16 @@ jobs:
           python-version: "3.9"
           # cache: "pip"
       - run: pip install -r requirements.txt
+      - id: script
+        run: |
+          if echo "::set-output name=log::$(python main.py)"; then
+            echo "::set-output name=result::true"
+          else
+            echo "::set-output name=result::false"
+          fi
       - run: |
-          result=$(python main.py)
-          exitA=$?
+          echo $log
           echo $result
-          echo $exitA
-        continue-on-error: true
+        with:
+          log: "${{ steps.script.outputs.log }}"
+          result: "${{ steps.script.outputs.result }}"
