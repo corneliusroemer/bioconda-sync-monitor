@@ -22,11 +22,17 @@ jobs:
           echo "Sync success"
           echo ${{ env.output }}
           echo ${{ env.result }}
+          rm sync_out_of_date || true
       - name: Sync out of date
-        if: ${{ env.result == '1' }}
+        if: ${{ env.result == '0' }}
         run: |
           echo "Sync not success"
-          gh issue create -R bioconda/bioconda-recipes --title "Bioconda CDN sync >1hr behind" --body "${{ env.output }}"
-          exit 1
+          if [ ! -f sync_out_of_date ]; then
+             gh issue create -R bioconda/bioconda-recipes --title "Bioconda CDN sync >1hr behind" --body "${{ env.output }}"
+             touch sync_out_of_date
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.ACTION }}
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update lock file
