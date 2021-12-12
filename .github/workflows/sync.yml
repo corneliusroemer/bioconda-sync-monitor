@@ -17,14 +17,14 @@ jobs:
       - id: script
         run: python main.py
       - name: Sync works
-        if: ${{ env.result == '1' }}
+        if: ${{ env.result == '0' }}
         run: |
           echo "Sync success"
           echo ${{ env.output }}
           echo ${{ env.result }}
           rm sync_out_of_date || true
       - name: Sync out of date
-        if: ${{ env.result == '0' }}
+        if: ${{ env.result == '1' }}
         run: |
           echo "Sync not success"
           if [ ! -f sync_out_of_date ]; then
