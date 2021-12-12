@@ -2,6 +2,7 @@
 import requests
 import dateutil.parser as parser
 import datetime
+import sys
 
 #%%
 r = requests.get('https://api.github.com/repos/bioconda/bioconda-recipes/commits')
@@ -30,4 +31,5 @@ print(f"Last commit: {commit_dates_parsed[0]}")
 print(f"Last sync: {last_modified_parsed - datetime.timedelta(hours=1)}")
 if list(filter(lambda x: x > last_modified_parsed, commit_dates_parsed)) != []:
     print("Sync is at least 1 hour behind")
-    
+
+sys.exit(1)
