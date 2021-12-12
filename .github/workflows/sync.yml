@@ -1,0 +1,16 @@
+name: GitHub Actions Demo
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  Check-Bioconda-Sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
+          cache: "pip"
+      - run: pip install -r requirements.txt
+      - run: pip test
