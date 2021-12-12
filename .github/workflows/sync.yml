@@ -19,3 +19,4 @@ jobs:
           exitA=$?
           echo $result
           echo $exitA
+        continue-on-error: true
