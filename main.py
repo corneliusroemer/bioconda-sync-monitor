@@ -33,17 +33,23 @@ last_sync = max(map(parser.parse, last_modified.values()))
 # 1. Were there any commits since last sync?
 # 2. Was any of these commits longer than 1 hour ago
 commits_since_last_sync = list(filter(lambda x: x > last_sync, commit_dates_parsed))
-earliest_commit_since_last_sync = min(commits_since_last_sync)
+try:
+    earliest_commit_since_last_sync = min(commits_since_last_sync)
+except ValueError:
+    earliest_commit_since_last_sync = None
 #%%
 output = f"Earliest commit since sync: {earliest_commit_since_last_sync} Last sync: {last_sync}"
 print(output)
 
 result = 0
-if earliest_commit_since_last_sync < datetime.datetime.now(pytz.utc) - datetime.timedelta(hours=1):
-    result = 1
-    print("Sync out of date")
+if earliest_commit_since_last_sync:
+    if earliest_commit_since_last_sync < datetime.datetime.now(pytz.utc) - datetime.timedelta(hours=1):
+        result = 1
+        print("Sync out of date")
+    else:
+        print("No hour passed since earliest commit after sync")
 else:
-    print("Sync seems up to date")
+    print("No commits since last sync")
 
 #%%
 GITHUB_ENV = os.environ["GITHUB_ENV"]
