@@ -22,8 +22,8 @@ jobs:
             echo "::set-output name=result::false"
           fi
       - run: |
-          echo $log
-          echo $result
-        with:
-          log: "${{ steps.script.outputs.log }}"
-          result: "${{ steps.script.outputs.result }}"
+          echo $LOG
+          echo $RESULT
+        env:
+          LOG: "${{ steps.script.outputs.log }}"
+          RESULT: "${{ steps.script.outputs.result }}"
