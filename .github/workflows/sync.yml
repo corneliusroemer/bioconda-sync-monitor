@@ -15,15 +15,7 @@ jobs:
           # cache: "pip"
       - run: pip install -r requirements.txt
       - id: script
-        run: |
-          if echo "::set-output name=log::$(python main.py)"; then
-            echo "::set-output name=result::true"
-          else
-            echo "::set-output name=result::false"
-          fi
+        run: python main.py
       - run: |
-          echo $LOG
-          echo $RESULT
-        env:
-          LOG: "${{ steps.script.outputs.log }}"
-          RESULT: "${{ steps.script.outputs.result }}"
+          echo ${{ env.output }}
+          echo ${{ env.result }}
