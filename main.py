@@ -27,9 +27,8 @@ for name,url in repodata.items():
     last_modified[name] = r.headers["Last-Modified"]
 last_modified_parsed = max(map(parser.parse, last_modified.values())) + datetime.timedelta(hours=1)
 #%%
-print(f"Last commit: {commit_dates_parsed[0]}")
-print(f"Last sync: {last_modified_parsed - datetime.timedelta(hours=1)}")
+print(f"Last commit: {commit_dates_parsed[0]}\n Last sync: {last_modified_parsed - datetime.timedelta(hours=1)}")
 if list(filter(lambda x: x > last_modified_parsed, commit_dates_parsed)) != []:
     print("Sync is at least 1 hour behind")
 
-sys.exit(1)
+sys.exit(0)
