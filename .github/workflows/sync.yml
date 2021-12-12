@@ -17,14 +17,15 @@ jobs:
       - id: script
         run: python main.py
       - name: run if sync success
-        if: env.result == '0'
+        if: ${{ env.result == '0' }}
         run: |
           echo "Sync success"
           echo ${{ env.output }}
           echo ${{ env.result }}
       - name: run if sync unsuccessful
-        if: env.result == '1'
+        if: ${{ env.result == '0' }}
         run: |
           echo "Sync not success"
-          echo ${{ env.output }}
-          echo ${{ env.result }}
+          gh issue create -R bioconda/bioconda-recipes --title "Bioconda CDN sync >1hr behind" --body $ {{ env.output }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACTION }}
