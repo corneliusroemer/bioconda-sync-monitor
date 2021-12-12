@@ -1,4 +1,4 @@
-name: GitHub Actions Demo
+name: Bioconda CDN Sync
 on:
   workflow_dispatch:
   schedule:
@@ -14,4 +14,4 @@ jobs:
           python-version: "3.9"
           # cache: "pip"
       - run: pip install -r requirements.txt
-      - run: pip test
+      - run: python main.py
