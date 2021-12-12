@@ -30,18 +30,16 @@ last_modified_parsed = max(map(parser.parse, last_modified.values())) + datetime
 #%%
 output = f"Last commit: {commit_dates_parsed[0]} Last sync: {last_modified_parsed - datetime.timedelta(hours=1)}"
 print(output)
-os.environ["LOG"] = output
 
-os.environ["RESULT"] = "1"
-
+result = 0
 if list(filter(lambda x: x > last_modified_parsed, commit_dates_parsed)) != []:
+    result = 1
     print("Sync is at least 1 hour behind")
 
 #%%
 GITHUB_ENV = os.environ["GITHUB_ENV"]
-print(GITHUB_ENV)
 
 #%%
 with open(GITHUB_ENV, "a") as f:
     f.write(f"output={output}\n")
-    f.write(f"result={output}\n")
+    f.write(f"result={result}\n")
