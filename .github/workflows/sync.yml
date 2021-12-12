@@ -33,9 +33,9 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.ACTION }}
-      - name: cat result into README
+      - name: echo result into README
         run: |
-          echo "{{ env.output }}" > README.md
+          echo "${{ env.output }}" > README.md
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Update lock file
