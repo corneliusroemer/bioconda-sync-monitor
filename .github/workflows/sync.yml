@@ -20,8 +20,8 @@ jobs:
         if: ${{ env.result == '0' }}
         run: |
           echo "Sync success"
-          echo ${{ env.output }}
-          echo ${{ env.result }}
+          echo "${{ env.output }}"
+          echo "${{ env.result }}"
           rm sync_out_of_date || true
       - name: Sync out of date
         if: ${{ env.result == '1' }}
