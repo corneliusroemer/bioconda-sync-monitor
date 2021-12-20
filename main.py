@@ -27,7 +27,6 @@ last_modified = {}
 for name,url in repodata.items():
     r = requests.head(url)
     last_modified[name] = r.headers["Last-Modified"]
-last_modified_parsed = max(map(parser.parse, last_modified.values())) + datetime.timedelta(hours=1)
 last_sync = max(map(parser.parse, last_modified.values()))
 #%%
 # 1. Were there any commits since last sync?
@@ -38,12 +37,12 @@ try:
 except ValueError:
     earliest_commit_since_last_sync = None
 #%%
-output = f"Earliest commit since sync: {earliest_commit_since_last_sync} Last sync: {last_sync}"
+output = f"Earliest commit since sync: {earliest_commit_since_last_sync} | Last sync: {last_sync}"
 print(output)
 
 result = 0
 if earliest_commit_since_last_sync:
-    if earliest_commit_since_last_sync < datetime.datetime.now(pytz.utc) - datetime.timedelta(hours=1):
+    if earliest_commit_since_last_sync < datetime.datetime.now(pytz.utc) - datetime.timedelta(hours=2):
         result = 1
         print("Sync out of date")
     else:
