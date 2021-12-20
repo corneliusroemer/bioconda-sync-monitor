@@ -28,7 +28,7 @@ jobs:
         run: |
           echo "Sync not success"
           if [ ! -f sync_out_of_date ]; then
-             gh issue create -R bioconda/bioconda-recipes --title "Bioconda CDN sync >1hr behind" --body "${{ env.output }}"
+             gh issue create -R bioconda/bioconda-recipes --title "Bioconda CDN sync >2hr behind" --body "${{ env.output }}"
              touch sync_out_of_date
           fi
         env:
