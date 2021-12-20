@@ -37,7 +37,7 @@ try:
 except ValueError:
     earliest_commit_since_last_sync = None
 #%%
-output = f"Earliest commit since sync: {earliest_commit_since_last_sync} | Last sync: {last_sync}"
+output = f"Earliest commit since sync: {earliest_commit_since_last_sync} Last sync: {last_sync}"
 print(output)
 
 result = 0
