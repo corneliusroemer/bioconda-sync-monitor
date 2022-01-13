@@ -2,7 +2,7 @@ name: Bioconda CDN Sync
 on:
   workflow_dispatch:
   schedule:
-    - cron: "* * * * *"
+    - cron: "36 * * * *"
 
 jobs:
   Check-Bioconda-Sync:
