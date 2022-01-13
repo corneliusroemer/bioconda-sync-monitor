@@ -37,12 +37,12 @@ try:
 except ValueError:
     earliest_commit_since_last_sync = None
 #%%
-output = f"Earliest commit since sync: {earliest_commit_since_last_sync} Last sync: {last_sync}"
+output = f"Now: {datetime.datetime.now(pytz.utc)} Earliest commit since sync: {earliest_commit_since_last_sync} Last sync: {last_sync}"
 print(output)
 
 result = 0
 if earliest_commit_since_last_sync:
-    if earliest_commit_since_last_sync < datetime.datetime.now(pytz.utc) - datetime.timedelta(hours=2):
+    if earliest_commit_since_last_sync < datetime.datetime.now(pytz.utc) - datetime.timedelta(hours=4):
         result = 1
         print("Sync out of date")
     else:
