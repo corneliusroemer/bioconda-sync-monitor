@@ -42,7 +42,7 @@ print(output)
 
 result = 0
 if earliest_commit_since_last_sync:
-    if earliest_commit_since_last_sync < datetime.datetime.now(pytz.utc) - datetime.timedelta(hours=4):
+    if earliest_commit_since_last_sync < datetime.datetime.now(pytz.utc) - datetime.timedelta(hours=15):
         result = 1
         print("Sync out of date")
     else:
